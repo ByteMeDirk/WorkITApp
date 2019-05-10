@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Create Team{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <form action="{{ url_for('add_team') }}" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" name="description">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Team</button>
+    </form>
+
+{% endblock %}
