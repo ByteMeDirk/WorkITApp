@@ -21,10 +21,10 @@
                     <form action="{{ url_for('delete_user') }}" method="POST">
 
                         <div class="form-group">
-                            <label for="username">Select Team:</label>
+                            <label for="username">Select User:</label>
                             <select class="form-control" id="username" name="username">
                                 {% for user in users %}
-                                    <option>{{ user['user_name'] }}</option>
+                                    <option>{{ user['name'] }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -49,8 +49,8 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user['user_id'] }}</td>
-                <td>{{ user['user_name'] }}</td>
+                <td>{{ user['id'] }}</td>
+                <td>{{ user['name'] }}</td>
                 <td>{{ user['email'] }}</td>
                 <td>{{ user['title'] }}</td>
                 <td>{{ user['team'] }}</td>

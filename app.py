@@ -39,17 +39,17 @@ def add_user():
     user_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            user_name = request.form['user_name']
+            name = request.form['name']
             email = request.form.get('email')
             title = request.form.get('title')
             team = request.form.get('team')
 
             cur = user_conn.cursor()
-            cur.execute('INSERT INTO "user"(user_name, email, title, team) VALUES (?, ?, ?, ?)',
-                        (user_name, email, title, team))
+            cur.execute('INSERT INTO "user"(name, email, title, team) VALUES (?, ?, ?, ?)',
+                        (name, email, title, team))
 
             user_conn.commit()
-            msg = "{} added to the system".format(user_name)
+            msg = "{} added to the system".format(name)
         except:
             user_conn.rollback()
             msg = "Error in insert operation"
@@ -64,9 +64,9 @@ def delete_user():
     if request.method == 'POST':
         try:
             cur = user_del_conn.cursor()
-            cur.execute("DELETE FROM user WHERE user_name='%s'" % request.form['username'])
+            cur.execute("DELETE FROM user WHERE name='%s'" % request.form['username'])
             user_del_conn.commit()
-            msg = "{} added deleted from the system".format(request.form['username'])
+            msg = "{} deleted from the system".format(request.form['username'])
         except:
             user_del_conn.rollback()
             msg = "Could not delete {}".format(request.form['username'])
