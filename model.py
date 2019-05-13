@@ -1,4 +1,4 @@
-# import sqlite3
+import sqlite3
 #
 # conn = sqlite3.connect('database.db')
 # print("Opened database successfully")
@@ -42,11 +42,12 @@
 #              'creator TEXT,'
 #              'current_owner TEXT,'
 #              'previous_owner TEXT,'
+#              'board TEXT,'
 #              'attachment BLOB)')
 #
 # print("Table created successfully")
 # conn.close()
-#
+# #
 # conn = sqlite3.connect('database.db')
 # print("Opened database successfully")
 #

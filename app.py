@@ -33,6 +33,13 @@ def create_board():
     return render_template('create_board.html')
 
 
+@app.route('/create_card')
+def create_card():
+    users = get_users()
+    boards = get_boards()
+    return render_template('create_card.html', users=users, boards=boards)
+
+
 @app.route('/user_list')
 def user_list():
     users = get_users()
@@ -144,8 +151,6 @@ def add_board():
             starred = request.form['starred']
             state = request.form['state']
 
-            print(name, description, privacy, starred, state)
-
             cur = board_conn.cursor()
             cur.execute('INSERT INTO "board"(name, description, privacy, starred, state_list) '
                         'VALUES (?, ?, ?, ?, ?)',
@@ -178,12 +183,86 @@ def delete_board():
             return render_template('result.html', msg=msg)
 
 
+@app.route('/add_card', methods=['POST', 'GET'])
+def add_card():
+    card_conn = sqlite3.connect('database.db')
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            description = request.form['description']
+            state = request.form['state']
+            creator = request.form['creator']
+            owner = request.form['owner']
+            current_owner = creator
+            label = request.form['label']
+            creation_date = date_time()
+            due_date = request.form['due_date']
+            board = request.form['board']
+
+            cur = card_conn.cursor()
+            cur.execute(
+                'INSERT INTO "card"(name, description, state, creator, owner, current_owner, label, creation_date, due_date, board) '
+                'VALUES (?,?,?,?,?,?,?,?,?,?)',
+                (name, description, state, creator, owner, current_owner, label, creation_date, due_date, board))
+
+            card_conn.commit()
+            msg = "{} added to the system".format(name)
+        except:
+            card_conn.rollback()
+            msg = "Error in insert operation"
+        finally:
+            card_conn.close()
+        return render_template('result.html', msg=msg)
+
+
+@app.route('/edit_card', methods=['GET', 'POST'])
+def edit_card():
+    if request.method == 'POST':
+        card_name = request.form['card_name']
+        card = get_specific_card(card_name)
+        teams, users, boards = get_teams(), get_users(), get_boards()
+        return render_template('edit_card.html', card_name=card_name, specific_card=card, teams=teams, users=users,
+                               boards=boards)
+
+
+@app.route('/update_edit_card', methods=['GET', 'POST'])
+def update_edit_card():
+    card_conn = sqlite3.connect('database.db')
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            description = request.form['description']
+            state = request.form['state']
+            label = request.form['label']
+            due_date = request.form['due_date']
+            edited_date = date_time()
+            current_owner = request.form['owner']
+            previous_owner = request.form['previous_owner']
+            board = request.form['board']
+
+            cur = card_conn.cursor()
+            cur.execute(
+                """UPDATE card SET name=?, description=?, state=?, label=?, due_date=?, edited_date=?, current_owner=?, previous_owner=?, board=? WHERE name=? """,
+                (name, description, state, label, due_date, edited_date, current_owner, previous_owner, board, name))
+
+            card_conn.commit()
+            msg = "{} updated".format(name)
+
+        except:
+            card_conn.rollback()
+            msg = "Error in insert operation"
+        finally:
+            card_conn.close()
+            return render_template('result.html', msg=msg)
+
+
 @app.route('/goto_kanban', methods=['GET', 'POST'])
 def goto_kanban():
     if request.method == 'POST':
         board_name = request.form['board_name']
         board = get_specific_board(board_name)
-        return render_template('kanban.html', board_name=board_name, specific_board=board)
+        cards = get_cards()
+        return render_template('kanban.html', board_name=board_name, specific_board=board, cards=cards)
 
 
 if __name__ == '__main__':

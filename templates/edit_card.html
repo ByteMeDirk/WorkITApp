@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Create User{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    {% for item in specific_card %}
+
+        <form action="{{ url_for('update_edit_card') }}" method="POST">
+            <div class="form-group">
+                <label for="name">Update Card Name:</label>
+                <input required="required" type="text" class="form-control" id="name" name="name"
+                       value="{{ item['name'] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Update Description:</label>
+                <input required="required" type="text" class="form-control" id="description" name="description"
+                       value="{{ item['description'] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="state">Update State: <span class="text-muted">{{ item['state'] }}</span></label>
+                <select class="form-control" id="state" name="state">
+                    <option>Low Priority</option>
+                    <option>Medium Priority</option>
+                    <option>High Priority</option>
+                    <option>Urgent Priority</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="owner">Update Card Owner: <span class="text-muted">{{ item['owner'] }}</span></label>
+                <select class="form-control" id="owner" name="owner">
+                    {% for user in users %}
+                        <option>{{ user['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="label">Update Label: <span class="text-muted">{{ item['label'] }}</span></label>
+                <select class="form-control" id="label" name="label">
+                    <option>Backlog</option>
+                    <option>In Progress</option>
+                    <option>In Review</option>
+                    <option>Done</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="due_date">Update Due Date: <span class="text-muted">{{ item['due_date'] }}</span></label>
+                <input type="date" name="due_date" min="1000-01-01" max="3000-12-31" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="board">Update Board: <span class="text-muted">{{ item['board'] }}</span></label>
+                <select class="form-control" id="board" name="board">
+                    {% for board in boards %}
+                        <option>{{ board['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="hidden" name="previous_owner" value="{{ item['owner'] }}">
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
+    {% endfor %}
+
+{% endblock %}
