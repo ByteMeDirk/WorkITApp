@@ -12,7 +12,8 @@ conn = sqlite3.connect('database.db')
 @app.route('/')
 def index():
     clc = card_list_count()
-    return render_template('index.html', clc=clc)
+    bcc = board_card_count()
+    return render_template('index.html', clc=clc, bcc=bcc)
 
 
 @app.route('/create_user')

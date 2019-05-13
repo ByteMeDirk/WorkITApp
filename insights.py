@@ -19,6 +19,18 @@ def card_list_count():
     print('card_list_count: ', result)
     return result
 
+
+card_list_count()
+
+
 def board_card_count():
+    result = {}
     for board in boards:
-        pass
+        result.update({board['name']: 0})
+    for board in boards:
+        for card in cards:
+            if card['board'] == board['name']: result[board['name']] += 1
+    return result
+
+
+board_card_count()

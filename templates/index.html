@@ -4,8 +4,9 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-
-
+    <div class="text-right mt-4">
+        <button class="btn btn-outline-info" onclick="location.reload(true);">Update Insights</button>
+    </div>
     <div class="row">
         <div class="col-6">
             <canvas id="card_list_count"></canvas>
@@ -39,17 +40,24 @@
                     type: 'bar',
                     data: {
                         datasets: [{
-
-                            data: [{{ clc[0] }}, {{ clc[1] }}, {{ clc[2] }}, {{ clc[3] }}],
-                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107"]
+                            data: [
+                                {% for value in bcc.values() %}
+                                    '{{ value }}',
+                                {% endfor %}
+                            ],
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d"]
                         }],
-                        labels: ['Backlog', 'In Progress', 'In Review', 'Done']
+                        labels: [
+                            {% for value in bcc.keys() %}
+                                '{{ value }}',
+                            {% endfor %}
+                        ]
                     },
                     options: {
                         responsive: true,
                         title: {
                             display: true,
-                            text: "What is the state of all cards?"
+                            text: "How many cards are ther per board?"
                         }
                     }
                 });
