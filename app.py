@@ -2,18 +2,15 @@ from flask import Flask, render_template, request
 import sqlite3
 from flask import Flask
 from scripts import *
+from insights import *
 
 app = Flask(__name__)
 conn = sqlite3.connect('database.db')
 
 
 @app.route('/')
-def base():
-    return render_template('base.html', date=date_time())
-
-
-@app.route('/')
 def index():
+    generate_insights()
     return render_template('index.html')
 
 
