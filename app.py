@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import sqlite3
 from flask import Flask
 from scripts import *
-from insights import generate_insights
+from insights import *
 
 app = Flask(__name__)
 conn = sqlite3.connect('database.db')
@@ -10,8 +10,9 @@ conn = sqlite3.connect('database.db')
 
 @app.route('/')
 def index():
-    generate_insights()
-    return render_template('index.html')
+    fig1 = card_list_pie_plot()
+    fig1.savefig('static/card_list_pie_plot.png')
+    return render_template('index.html', fig1='static/card_list_pie_plot.png')
 
 
 @app.route('/create_user')
@@ -84,7 +85,6 @@ def add_user():
             msg = "Error in insert operation"
         finally:
             user_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -102,7 +102,6 @@ def delete_user():
             msg = "Could not delete {}".format(request.form['username'])
         finally:
             user_del_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -125,7 +124,6 @@ def add_team():
             msg = "Error in insert operation"
         finally:
             team_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -143,7 +141,6 @@ def delete_team():
             msg = "Could not delete {}".format(request.form['teamname'])
         finally:
             user_del_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -170,7 +167,6 @@ def add_board():
             msg = "Error in insert operation"
         finally:
             board_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -188,7 +184,6 @@ def delete_board():
             msg = "Could not delete {}".format(request.form['name'])
         finally:
             board_del_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -221,7 +216,6 @@ def add_card():
             msg = "Error in insert operation"
         finally:
             card_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -231,7 +225,6 @@ def edit_card():
         card_name = request.form['card_name']
         card = get_specific_card(card_name)
         teams, users, boards = get_teams(), get_users(), get_boards()
-        generate_insights()
         return render_template('edit_card.html', card_name=card_name, specific_card=card, teams=teams, users=users,
                                boards=boards)
 
@@ -264,7 +257,6 @@ def update_edit_card():
             msg = "Error in insert operation"
         finally:
             card_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -298,7 +290,6 @@ def archive_card():
             msg = "Error in insert operation"
         finally:
             card_conn.close()
-            generate_insights()
             return render_template('result.html', msg=msg)
 
 
@@ -309,7 +300,6 @@ def delete_card():
         cur = board_del_conn.cursor()
         cur.execute("DELETE FROM card WHERE name='%s'" % request.form['card_name'])
         board_del_conn.commit()
-        generate_insights()
         return render_template('result.html')
 
 
