@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from scripts import *
+import os
 
 teams = get_teams()
 users = get_users()
@@ -9,6 +10,7 @@ archive = get_archive()
 
 
 def generate_insights():
+    os.remove(r"static/card_labels.png")
     backlog, in_progress, in_review, done, sizes = 0, 0, 0, 0, []
     for card in cards:
         if card['label'] == 'Backlog': backlog += 1
@@ -23,10 +25,9 @@ def generate_insights():
 
     colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
     labels = 'Backlog', 'In Progress', 'In Review', 'Done'
-    explode = (0.1, 0, 0, 0.1)
+    explode = (0, 0, 0, 0)
 
     plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', shadow=True, startangle=140)
     plt.axis('equal')
-    plt.savefig('static/insights/card_labels.png')
-
-generate_insights()
+    plt.savefig('static/card_labels.png')
+    print('Generated card_labels.png')
