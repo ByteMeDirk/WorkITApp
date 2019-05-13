@@ -79,3 +79,15 @@ def get_specific_card(card_name):
 
     kanban_conn.close()
     return board
+
+
+def get_archive():
+    con_cards = sqlite3.connect("database.db")
+    con_cards.row_factory = sqlite3.Row
+
+    cur = con_cards.cursor()
+    cur.execute("SELECT * FROM card_archive")
+
+    card_arch = cur.fetchall()
+    con_cards.close()
+    return card_arch

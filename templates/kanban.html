@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}User List{% endblock %}
+{% block title %}Kanban{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock %}
@@ -178,6 +178,11 @@
                                 <form action="{{ url_for('edit_card') }}" method="POST">
                                     <input type="hidden" name="card_name" value="{{ card['name'] }}">
                                     <button type="submit" class="btn btn-outline-dark btn-sm float-right">Edit</button>
+                                </form>
+                                <form action="{{ url_for('archive_card') }}" method="POST">
+                                    <input type="hidden" name="card_name" value="{{ card['name'] }}">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm float-right">Archive
+                                    </button>
                                 </form>
                             </div>
                         </div>

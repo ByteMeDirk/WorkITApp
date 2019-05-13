@@ -1,4 +1,5 @@
 import sqlite3
+
 #
 # conn = sqlite3.connect('database.db')
 # print("Opened database successfully")
@@ -59,6 +60,21 @@ import sqlite3
 #              'card TEXT,'
 #              'team TEXT,'
 #              'profile BLOB)')
+#
+# print("Table created successfully")
+# conn.close()
+
+# conn = sqlite3.connect('database.db')
+# print("Opened database successfully")
+#
+# conn.execute('CREATE TABLE card_archive'
+#              '(id INTEGER PRIMARY KEY AUTOINCREMENT,'
+#              'name TEXT,'
+#              'description TEXT,'
+#              'creation_date TEXT,'
+#              'closed_date TEXT,'
+#              'creator TEXT,'
+#              'board TEXT)')
 #
 # print("Table created successfully")
 # conn.close()

@@ -60,6 +60,12 @@ def board_list():
     return render_template('board_list.html', boards=boards)
 
 
+@app.route('/card_archive')
+def card_archive():
+    card_arch = get_archive()
+    return render_template('card_archive.html', card_arch=card_arch)
+
+
 @app.route('/add_user', methods=['POST', 'GET'])
 def add_user():
     user_conn = sqlite3.connect('database.db')
@@ -254,6 +260,49 @@ def update_edit_card():
         finally:
             card_conn.close()
             return render_template('result.html', msg=msg)
+
+
+@app.route('/archive_card', methods=['GET', 'POST'])
+def archive_card():
+    card_conn = sqlite3.connect('database.db')
+    if request.method == 'POST':
+        try:
+            card_name = request.form['card_name']
+            specific_card = get_specific_card(card_name)
+            cur = card_conn.cursor()
+
+            for spe_card in specific_card:
+                name = spe_card['name']
+                description = spe_card['description']
+                creation_date = spe_card['creation_date']
+                closed_date = date_time()
+                creator = spe_card['creator']
+                board = spe_card['board']
+
+            cur.execute('INSERT INTO "card_archive" (name, description, creation_date, closed_date, creator, board) '
+                        'VALUES (?,?,?,?,?,?)',
+                        (name, description, creation_date, closed_date, creator, board))
+            card_conn.commit()
+
+            delete_card()
+
+            msg = "{} archived".format(name)
+        except:
+            card_conn.rollback()
+            msg = "Error in insert operation"
+        finally:
+            card_conn.close()
+            return render_template('result.html', msg=msg)
+
+
+@app.route('/delete_card', methods=['GET', 'POST'])
+def delete_card():
+    board_del_conn = sqlite3.connect('database.db')
+    if request.method == 'POST':
+        cur = board_del_conn.cursor()
+        cur.execute("DELETE FROM card WHERE name='%s'" % request.form['card_name'])
+        board_del_conn.commit()
+        return render_template('result.html', msg=msg)
 
 
 @app.route('/goto_kanban', methods=['GET', 'POST'])
