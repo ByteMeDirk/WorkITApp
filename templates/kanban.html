@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}User List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    {% for item in specific_board %}
+
+        <h3 class="mt-1 text-muted">{{ item['name'] }} -
+            <small class="text-info">{{ item['state_list'] }}</small>
+        </h3>
+        <p>{{ item['description'] }} -
+            <span class="text-warning">
+            {% if item['privacy'] == 'Private' %}
+                <i class="fa fa-lock"></i>
+            {% else %}
+                <i class="fa fa-unlock"></i>
+            {% endif %}
+        </span>
+        </p>
+
+        <div class="row mt-1 mb-1">
+
+            <div class="col" style="padding: 0">
+                <div class="card">
+                    <div class="card-header">Backlog</div>
+                    <div class="card-body">Card Goes Here...</div>
+                </div>
+            </div>
+            <div class="col" style="padding: 0">
+                <div class="card">
+                    <div class="card-header">In Progress</div>
+                    <div class="card-body">Card Goes Here...</div>
+                </div>
+            </div>
+            <div class="col" style="padding: 0">
+                <div class="card">
+                    <div class="card-header">In Review</div>
+                    <div class="card-body">Card Goes Here...</div>
+                </div>
+            </div>
+            <div class="col" style="padding: 0">
+                <div class="card">
+                    <div class="card-header">Done</div>
+                    <div class="card-body">Card Goes Here...</div>
+                </div>
+            </div>
+
+        </div>
+
+
+    {% endfor %}
+
+
+{% endblock %}

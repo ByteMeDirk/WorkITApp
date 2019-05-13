@@ -29,3 +29,28 @@ def get_users():
     users = cur.fetchall()
     con_users.close()
     return users
+
+
+def get_boards():
+    con_boards = sqlite3.connect("database.db")
+    con_boards.row_factory = sqlite3.Row
+
+    cur = con_boards.cursor()
+    cur.execute("SELECT * FROM board")
+
+    boards = cur.fetchall()
+    con_boards.close()
+    return boards
+
+
+def get_specific_board(board_name):
+    kanban_conn = sqlite3.connect('database.db')
+    kanban_conn.row_factory = sqlite3.Row
+
+    cur = kanban_conn.cursor()
+    cur.execute("SELECT * FROM board WHERE name='%s'" % board_name)
+
+    board = cur.fetchall()
+
+    kanban_conn.close()
+    return board

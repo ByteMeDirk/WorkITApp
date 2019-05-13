@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}User List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <style>
+        a.text-dark:hover {
+            text-decoration: none;
+        }
+    </style>
+
+    <div class="text-right mt-1 mb-1">
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete-user">
+            Delete Board
+        </button>
+    </div>
+
+    <div class="modal" id="delete-user">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Board</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{{ url_for('delete_board') }}" method="POST">
+
+                        <div class="form-group">
+                            <label for="username">Select Board:</label>
+                            <select class="form-control" id="username" name="name">
+                                {% for board in boards %}
+                                    <option>{{ board['name'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Delete Board</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for board in boards %}
+            <div class="col-3">
+                <form action="{{ url_for('goto_kanban') }}" method="POST">
+
+                    <div class="card {{ 'bg-warning' if board['starred'] == 'Yes' }}">
+                        <div class="card-header">
+                            {{ board['id'] }} - {{ board['name'] }}
+                            <div class="float-right text-dark">
+                                {% if board['privacy'] == 'Private' %}
+                                    <i class="fa fa-lock"></i>
+                                {% else %}
+                                    <i class="fa fa-unlock"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <strong>Description:</strong><br>
+                            {{ board['description'] }} <br>
+                        </div>
+                        <div class="card-footer">
+                            {{ board['state_list'] }} <br>
+                             <button type="submit" class="btn btn-outline-dark float-right btn-sm">Go To Board</button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="board_name" value="{{ board['name'] }}">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
