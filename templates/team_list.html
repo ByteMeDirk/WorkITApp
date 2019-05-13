@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}User List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <div class="text-right mt-1 mb-1">
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete-team">
+            Delete Team
+        </button>
+    </div>
+
+    <div class="modal" id="delete-team">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Team</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{{ url_for('delete_team') }}" method="POST">
+
+                        <div class="form-group">
+                            <label for="teamname">Select Team:</label>
+                            <select class="form-control" id="teamname" name="teamname">
+                                {% for team in teams %}
+                                    <option>{{ team['name'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <small>Note: If you decide to delete a team, some users may no longer be assigned to a team and
+                            will need to be updated.
+                        </small>
+                        <br>
+                        <br>
+
+                        <button type="submit" class="btn btn-primary">Delete Team</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Team name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team['id'] }}</td>
+                <td>{{ team['name'] }}</td>
+                <td>{{ team['description'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -31,7 +31,15 @@ def create_team():
 @app.route('/user_list')
 def user_list():
     users = get_users()
-    return render_template('user_list.html', users=users)
+    teams = get_teams()
+    return render_template('user_list.html', users=users, teams=teams)
+
+
+@app.route('/team_list')
+def team_list():
+    users = get_users()
+    teams = get_teams()
+    return render_template('team_list.html', users=users, teams=teams)
 
 
 @app.route('/add_user', methods=['POST', 'GET'])
@@ -94,6 +102,23 @@ def add_team():
             msg = "Error in insert operation"
         finally:
             team_conn.close()
+            return render_template('result.html', msg=msg)
+
+
+@app.route('/delete_team', methods=['GET', 'POST'])
+def delete_team():
+    user_del_conn = sqlite3.connect('database.db')
+    if request.method == 'POST':
+        try:
+            cur = user_del_conn.cursor()
+            cur.execute("DELETE FROM team WHERE name='%s'" % request.form['teamname'])
+            user_del_conn.commit()
+            msg = "{} deleted from the system".format(request.form['teamname'])
+        except:
+            user_del_conn.rollback()
+            msg = "Could not delete {}".format(request.form['teamname'])
+        finally:
+            user_del_conn.close()
             return render_template('result.html', msg=msg)
 
 
