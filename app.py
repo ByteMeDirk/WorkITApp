@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask
 from scripts import *
 from insights import *
+import time
 
 app = Flask(__name__)
 conn = sqlite3.connect('database.db')
@@ -10,9 +11,8 @@ conn = sqlite3.connect('database.db')
 
 @app.route('/')
 def index():
-    fig1 = card_list_pie_plot()
-    fig1.savefig('static/card_list_pie_plot.png')
-    return render_template('index.html', fig1='static/card_list_pie_plot.png')
+    clc = card_list_count()
+    return render_template('index.html', clc=clc)
 
 
 @app.route('/create_user')
@@ -313,5 +313,8 @@ def goto_kanban():
 
 
 if __name__ == '__main__':
+    app.config['ENV'] = 'development'
     app.config['DEBUG'] = True
+    app.config['TESTING'] = True
     app.run(debug=True)
+    start_time = time.time()

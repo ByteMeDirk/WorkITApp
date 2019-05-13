@@ -4,5 +4,57 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <img src={{ fig1 }}>
+
+
+    <div class="row">
+        <div class="col-6">
+            <canvas id="card_list_count"></canvas>
+            <script>
+                ctx = document.getElementById('card_list_count').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            label: 'Colors',
+                            data: [{{ clc[0] }}, {{ clc[1] }}, {{ clc[2] }}, {{ clc[3] }}],
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107"]
+                        }],
+                        labels: ['Backlog', 'In Progress', 'In Review', 'Done']
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: "What is the state of all cards?"
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div class="col-6">
+            <canvas id="board_card_count"></canvas>
+            <script>
+                ctx = document.getElementById('board_card_count').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+
+                            data: [{{ clc[0] }}, {{ clc[1] }}, {{ clc[2] }}, {{ clc[3] }}],
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107"]
+                        }],
+                        labels: ['Backlog', 'In Progress', 'In Review', 'Done']
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: "What is the state of all cards?"
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+
 {% endblock %}

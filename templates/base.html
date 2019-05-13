@@ -5,13 +5,17 @@
         <title>{% block title %}{% endblock %} - Work.IT</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/insights.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     {% endblock %}
 </head>
-<body>
+<body class="fade">
+<script>
+    document.body.className = 'fade';
+</script>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <a class="navbar-brand text-success" href="/">Work.IT</a>
     <ul class="navbar-nav">
@@ -65,5 +69,10 @@
 
     {% endblock %}
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function (e) {
+        document.body.className = '';
+    });
+</script>
 </body>
 </html>

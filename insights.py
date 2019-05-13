@@ -1,5 +1,6 @@
 from scripts import *
 import matplotlib.pyplot as plt
+import os
 
 teams = get_teams()
 users = get_users()
@@ -8,21 +9,16 @@ boards = get_boards()
 archive = get_archive()
 
 
-def card_list_pie_plot():
-    backl, inpro, inrev, done, sizes = 0, 0, 0, 0, []
-    labels = 'Backlog', 'In Progress', 'In Review', 'Done'
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+def card_list_count():
+    result = [0, 0, 0, 0]
     for card in cards:
-        if card['label'] == 'Backlog': backl += 1
-        if card['label'] == 'In Progress': inpro += 1
-        if card['label'] == 'In Review': inrev += 1
-        if card['label'] == 'Done': done += 1
+        if card['label'] == 'Backlog': result[0] += 1
+        if card['label'] == 'In Progress': result[1] += 1
+        if card['label'] == 'In Review': result[2] += 1
+        if card['label'] == 'Done': result[3] += 1
+    print('card_list_count: ', result)
+    return result
 
-    sizes.append(backl)
-    sizes.append(inpro)
-    sizes.append(inrev)
-    sizes.append(done)
-
-    plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
-    plt.axis('equal')
-    return plt
+def board_card_count():
+    for board in boards:
+        pass

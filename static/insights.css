@@ -1,0 +1,11 @@
+body {
+    opacity: 1;
+    transition: 0.7s opacity;
+
+    background-color: #f1f1f1; /* Used if the image is unavailable */
+}
+
+body.fade {
+    opacity: 0;
+    transition: none;
+}
