@@ -7,6 +7,13 @@ def date_time():
     return '{}-{}-{}'.format(date.year, date.month, date.day)
 
 
+def month_to_string(number):
+    months = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+              7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
+    for key, val in months.items():
+        if number == key: return val
+
+
 def get_teams():
     con_teams = sqlite3.connect("database.db")
     con_teams.row_factory = sqlite3.Row

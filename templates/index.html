@@ -7,7 +7,7 @@
     <div class="text-right mt-4">
         <button class="btn btn-outline-info" onclick="location.reload(true);">Update Insights</button>
     </div>
-    <div class="row">
+    <div class="row mt-4 mb-4">
         <div class="col-6">
             <canvas id="card_list_count"></canvas>
             <script>
@@ -33,36 +33,76 @@
             </script>
         </div>
         <div class="col-6">
+            <canvas id="card_calendar"></canvas>
+            <script>
+                var ctx = document.getElementById("card_calendar").getContext('2d');
+                var card_calendar = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for value in cc.keys() %}
+                                '{{ value }}',
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            fill: false,
+                            data: [
+                                {% for value in cc.values() %}
+                                    '{{ value }}',
+                                {% endfor %}
+                            ],
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d"],
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: "What is the total amount of cards due over time?"
+                        },
+                        beginAtZero: true,
+                    }
+                });
+            </script>
+        </div>
+        <div class="col-12 mt-4">
             <canvas id="board_card_count"></canvas>
             <script>
-                ctx = document.getElementById('board_card_count').getContext('2d');
-                chart = new Chart(ctx, {
+                var ctx = document.getElementById("board_card_count").getContext('2d');
+                var board_card_count = new Chart(ctx, {
                     type: 'bar',
                     data: {
+                        labels: [
+                            {% for value in bcc.keys() %}
+                                '{{ value }}',
+                            {% endfor %}
+                        ],
                         datasets: [{
                             data: [
                                 {% for value in bcc.values() %}
                                     '{{ value }}',
                                 {% endfor %}
                             ],
-                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d"]
-                        }],
-                        labels: [
-                            {% for value in bcc.keys() %}
-                                '{{ value }}',
-                            {% endfor %}
-                        ]
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d"],
+                        }]
                     },
                     options: {
+                        legend: {
+                            display: false
+                        },
                         responsive: true,
                         title: {
                             display: true,
-                            text: "How many cards are ther per board?"
+                            text: "What is the total amount of cards per board?"
                         }
                     }
                 });
             </script>
         </div>
+
     </div>
 
 {% endblock %}

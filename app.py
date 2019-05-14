@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import sqlite3
-from flask import Flask
 from scripts import *
 from insights import *
 import time
@@ -13,7 +12,8 @@ conn = sqlite3.connect('database.db')
 def index():
     clc = card_list_count()
     bcc = board_card_count()
-    return render_template('index.html', clc=clc, bcc=bcc)
+    cc = card_calendar()
+    return render_template('index.html', clc=clc, bcc=bcc, cc=cc)
 
 
 @app.route('/create_user')
@@ -317,5 +317,5 @@ if __name__ == '__main__':
     app.config['ENV'] = 'development'
     app.config['DEBUG'] = True
     app.config['TESTING'] = True
-    app.run(debug=True)
+    app.run()
     start_time = time.time()

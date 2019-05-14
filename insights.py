@@ -30,7 +30,29 @@ def board_card_count():
     for board in boards:
         for card in cards:
             if card['board'] == board['name']: result[board['name']] += 1
+    print('board_card_count: ', result)
     return result
 
 
 board_card_count()
+
+
+def card_calendar():
+    all_dates_keys = []
+    all_dates_vals = []
+
+    for card in cards:
+        all_dates_keys.append(card['due_date'][:-3])
+        all_dates_vals.append(0)
+
+    all_dates_dict = dict(zip(all_dates_keys, all_dates_vals))
+
+    for card in cards:
+        for date in all_dates_dict:
+            if card['due_date'][:-3] == date: all_dates_dict[card['due_date'][:-3]] += 1
+
+    print('card_calendar: ', all_dates_dict)
+    return all_dates_dict
+
+
+card_calendar()
