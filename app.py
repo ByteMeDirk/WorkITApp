@@ -316,9 +316,14 @@ def goto_kanban():
         return render_template('kanban.html', board_name=board_name, specific_board=board, cards=cards)
 
 
+@app.route('/reload', methods=['GET', 'POST'])
+def reload():
+    total_reload()
+    return render_template('result.html', msg='Insights has been updated!')
+
+
 if __name__ == '__main__':
-    app.config['ENV'] = 'development'
-    app.config['DEBUG'] = True
-    app.config['TESTING'] = True
     app.run()
+    app.debug = True
+    app.testing = True
     start_time = time.time()

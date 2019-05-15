@@ -5,7 +5,9 @@
 {% endblock %}
 {% block content %}
     <div class="text-right mt-4">
-        <button class="btn btn-outline-info" onclick="location.reload(true);">Update Insights</button>
+        <form action="{{ url_for('reload') }}" method="POST">
+            <button type="submit" class="btn btn-outline-dark btn-sm"><i class="fa fa-refresh"></i></button>
+        </form>
     </div>
     <div class="row mt-4 mb-4">
 
@@ -122,6 +124,13 @@
                         title: {
                             display: true,
                             text: "What is the total amount of cards per board?"
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
                         }
                     }
                 });

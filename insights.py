@@ -92,3 +92,12 @@ def carousel_insights():
 
 
 carousel_insights()
+
+
+def total_reload():
+    daily_card_count()
+    card_list_count()
+    board_card_count()
+    card_calendar()
+    carousel_insights()
+    get_daily_card_count()
