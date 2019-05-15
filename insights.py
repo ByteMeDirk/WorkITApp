@@ -1,12 +1,37 @@
 from scripts import *
 import matplotlib.pyplot as plt
 import os
+import collections
+import sqlite3
 
 teams = get_teams()
 users = get_users()
 cards = get_cards()
 boards = get_boards()
 archive = get_archive()
+
+
+def daily_card_count():
+    print('Updating Daily Card Count')
+    conn = sqlite3.connect('database.db')
+    today = date_time()
+    count = 0
+    for card in cards: count += 1
+
+    cur = conn.cursor()
+    last_in = cur.execute('SELECT day FROM "card_count" WHERE day=(SELECT MAX(day) FROM "card_count")')
+    for last in last_in:
+        if last[0] == today:
+            print('Updating already existing date')
+            cur.execute('UPDATE "card_count" SET count=? WHERE day=?', (count, today))
+        else:
+            print('Adding a new day')
+            cur.execute('INSERT INTO "card_count"(count, day) VALUES (?, ?)', (count, today))
+
+    conn.close()
+
+
+daily_card_count()
 
 
 def card_list_count():
@@ -56,3 +81,14 @@ def card_calendar():
 
 
 card_calendar()
+
+
+def carousel_insights():
+    boards_list = []
+    for card in cards:
+        boards_list.append(card['board'])
+
+    return collections.Counter(boards_list)
+
+
+carousel_insights()

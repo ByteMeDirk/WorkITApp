@@ -10,10 +10,13 @@ conn = sqlite3.connect('database.db')
 
 @app.route('/')
 def index():
+    daily_card_count()
     clc = card_list_count()
     bcc = board_card_count()
     cc = card_calendar()
-    return render_template('index.html', clc=clc, bcc=bcc, cc=cc)
+    ci = carousel_insights()
+    dcc = get_daily_card_count()
+    return render_template('index.html', clc=clc, bcc=bcc, cc=cc, ci=ci, dcc=dcc)
 
 
 @app.route('/create_user')

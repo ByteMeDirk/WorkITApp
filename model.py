@@ -78,3 +78,14 @@ import sqlite3
 #
 # print("Table created successfully")
 # conn.close()
+
+# conn = sqlite3.connect('database.db')
+# print("Opened database successfully")
+#
+# conn.execute('CREATE TABLE card_count'
+#              '(id INTEGER PRIMARY KEY AUTOINCREMENT,'
+#              'count INT,'
+#              'day TEXT)')
+#
+# print("Table created successfully")
+# conn.close()

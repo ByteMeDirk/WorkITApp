@@ -4,7 +4,7 @@ import sqlite3
 
 def date_time():
     date = datetime.datetime.now()
-    return '{}-{}-{}'.format(date.year, date.month, date.day)
+    return '%d-%02d-%02d' % (date.year, date.month, date.day)
 
 
 def month_to_string(number):
@@ -98,3 +98,15 @@ def get_archive():
     card_arch = cur.fetchall()
     con_cards.close()
     return card_arch
+
+
+def get_daily_card_count():
+    con_cards = sqlite3.connect("database.db")
+    con_cards.row_factory = sqlite3.Row
+
+    cur = con_cards.cursor()
+    cur.execute("SELECT * FROM card_count")
+
+    card_count = cur.fetchall()
+    con_cards.close()
+    return card_count

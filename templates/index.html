@@ -8,6 +8,7 @@
         <button class="btn btn-outline-info" onclick="location.reload(true);">Update Insights</button>
     </div>
     <div class="row mt-4 mb-4">
+
         <div class="col-6">
             <canvas id="card_list_count"></canvas>
             <script>
@@ -68,7 +69,31 @@
                 });
             </script>
         </div>
-        <div class="col-12 mt-4">
+        <div class="col-12" style="margin: 4rem 0;">
+            <div id="insights-carousel" class="carousel slide" data-ride="carousel">
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    {% for key, val in ci.items() %}
+                        <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                            <div class="text-center">
+                                <h3><span class="text-muted">Board: </span>{{ key }}</h3>
+                                <p><span class="text-muted">Cards: </span>{{ val }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#insights-carousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#insights-carousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-6 mt-4">
             <canvas id="board_card_count"></canvas>
             <script>
                 var ctx = document.getElementById("board_card_count").getContext('2d');
@@ -102,7 +127,43 @@
                 });
             </script>
         </div>
+        <div class="col-6 mt-4">
+
+            <canvas id="daily_card_count"></canvas>
+            <script>
+                var ctx = document.getElementById("daily_card_count").getContext('2d');
+                var daily_card_count = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for i in [5,4,3,2,1] %}
+                                '{{ dcc[-i]['day'] }}',
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            fill: false,
+                            data: [
+                                {% for i in [5,4,3,2,1] %}
+                                    '{{ dcc[-i]['count'] }}',
+                                {% endfor %}
+                            ],
+                            backgroundColor: ["#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d", "#007bff", "#28a745", "#17a2b8", "#ffc107", "#dc3545", "#6c757d"],
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: "What are the total amount of cards created/completed in the last 5 days?"
+                        },
+                        beginAtZero: true,
+                    }
+                });
+            </script>
+        </div>
 
     </div>
-
 {% endblock %}
