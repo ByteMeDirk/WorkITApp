@@ -11,13 +11,11 @@
             <small class="text-info">{{ master['state_list'] }}</small>
         </h3>
         <p>{{ master['description'] }} -
-            <span class="text-warning">
             {% if master['privacy'] == 'Private' %}
-                <i class="fa fa-lock"></i>
+                <i class="fa fa-lock text-danger"></i>
             {% else %}
-                <i class="fa fa-unlock"></i>
+                <i class="fa fa-unlock text-success"></i>
             {% endif %}
-        </span>
         </p>
 
         <!-- Board Frame -->

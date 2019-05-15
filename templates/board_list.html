@@ -4,7 +4,6 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-
     <style>
         a.text-dark:hover {
             text-decoration: none;
@@ -46,17 +45,19 @@
 
     <div class="row">
         {% for board in boards %}
-            <div class="col-3">
+            <div class="col-3 mt-4 mb-4">
                 <form action="{{ url_for('goto_kanban') }}" method="POST">
 
-                    <div class="card {{ 'bg-warning' if board['starred'] == 'Yes' }}">
+                    <div class="card {{ 'bg-info text-light' if board['starred'] == 'Yes' }}">
                         <div class="card-header">
                             {{ board['id'] }} - {{ board['name'] }}
                             <div class="float-right text-dark">
                                 {% if board['privacy'] == 'Private' %}
-                                    <i class="fa fa-lock"></i>
+                                    <i class="fa fa-lock text-danger"
+                                       style=" position: absolute; bottom: 14.5rem; left: 15rem; font-size: 1.5rem;"></i>
                                 {% else %}
-                                    <i class="fa fa-unlock"></i>
+                                    <i class="fa fa-unlock text-success"
+                                       style=" position: absolute; bottom: 14.5rem; left: 15rem; font-size: 1.5rem;"></i>
                                 {% endif %}
                             </div>
                         </div>
@@ -66,7 +67,12 @@
                         </div>
                         <div class="card-footer">
                             {{ board['state_list'] }} <br>
-                             <button type="submit" class="btn btn-outline-dark float-right btn-sm">Go To Board</button>
+                            {% if board['privacy'] == 'Private' %}
+                                <button type="submit" class="btn btn-dark float-right btn-sm">Go To Board</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-outline-dark float-right btn-sm">Go To Board
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                     <input type="hidden" name="board_name" value="{{ board['name'] }}">

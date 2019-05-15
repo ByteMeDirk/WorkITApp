@@ -6,10 +6,22 @@
 {% block content %}
 
     <div class="results text-center mt-5">
-        <div class="card">
-            <div class="card-header">
+        <div class="display-4">
+            <span style="color: #17a2b8">Work</span><span style="color: #28a745;">●</span><span
+                style="color: #333">IT</span></a>
+        </div>
+        <div class="card" style="background: transparent">
+            <div class="card-body mt-4 mb-4" style="background: transparent">
                 {{ msg }}<br>
-                <a class="btn btn-dark mt-5" href="/">Done</a>
+                <a class="btn btn-outline-info mt-5" href="/">Insights</a>
+
+                <button class="btn btn-outline-dark mt-5" onclick="goBack()">Go Back</button>
+
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
             </div>
 
         </div>
