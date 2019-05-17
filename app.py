@@ -37,6 +37,7 @@ def create_board():
 
 @app.route('/create_card')
 def create_card():
+    get_daily_card_count()
     users = get_users()
     boards = get_boards()
     return render_template('create_card.html', users=users, boards=boards)
@@ -64,6 +65,7 @@ def board_list():
 
 @app.route('/card_archive')
 def card_archive():
+    get_daily_card_count()
     card_arch = get_archive()
     return render_template('card_archive.html', card_arch=card_arch)
 
@@ -309,6 +311,7 @@ def delete_card():
 
 @app.route('/goto_kanban', methods=['GET', 'POST'])
 def goto_kanban():
+    get_daily_card_count()
     if request.method == 'POST':
         board_name = request.form['board_name']
         board = get_specific_board(board_name)
@@ -318,12 +321,12 @@ def goto_kanban():
 
 @app.route('/reload', methods=['GET', 'POST'])
 def reload():
+    get_daily_card_count()
     total_reload()
     return render_template('result.html', msg='Insights has been updated!')
 
 
 if __name__ == '__main__':
-    app.run()
-    app.debug = True
-    app.testing = True
+    get_daily_card_count()
+    app.run(debug=True)
     start_time = time.time()

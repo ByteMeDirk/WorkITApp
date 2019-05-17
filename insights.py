@@ -28,6 +28,7 @@ def daily_card_count():
             print('Adding a new day')
             cur.execute('INSERT INTO "card_count"(count, day) VALUES (?, ?)', (count, today))
 
+    conn.commit()
     conn.close()
 
 
