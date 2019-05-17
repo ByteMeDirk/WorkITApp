@@ -19,7 +19,7 @@ def get_teams():
     con_teams.row_factory = sqlite3.Row
 
     cur = con_teams.cursor()
-    cur.execute("SELECT * FROM team")
+    cur.execute("SELECT * FROM team ORDER BY name")
 
     teams = cur.fetchall()
     con_teams.close()
@@ -31,7 +31,7 @@ def get_users():
     con_users.row_factory = sqlite3.Row
 
     cur = con_users.cursor()
-    cur.execute("SELECT * FROM user")
+    cur.execute("SELECT * FROM user ORDER BY name")
 
     users = cur.fetchall()
     con_users.close()
@@ -43,7 +43,7 @@ def get_boards():
     con_boards.row_factory = sqlite3.Row
 
     cur = con_boards.cursor()
-    cur.execute("SELECT * FROM board")
+    cur.execute("SELECT * FROM board ORDER BY name")
 
     boards = cur.fetchall()
     con_boards.close()
@@ -55,7 +55,7 @@ def get_cards():
     con_cards.row_factory = sqlite3.Row
 
     cur = con_cards.cursor()
-    cur.execute("SELECT * FROM card")
+    cur.execute("SELECT * FROM card ORDER BY creation_date")
 
     cards = cur.fetchall()
     con_cards.close()

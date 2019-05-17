@@ -21,8 +21,9 @@
             </div>
 
             <div class="form-group">
-                <label for="state">Update State: <span class="text-muted">{{ item['state'] }}</span></label>
+                <label for="state">Update State:</label>
                 <select class="form-control" id="state" name="state">
+                    <option class="text-info">{{ item['state'] }}</option>
                     <option>Low Priority</option>
                     <option>Medium Priority</option>
                     <option>High Priority</option>
@@ -31,8 +32,9 @@
             </div>
 
             <div class="form-group">
-                <label for="owner">Update Card Owner: <span class="text-muted">{{ item['owner'] }}</span></label>
+                <label for="owner">Update Card Owner: </label>
                 <select class="form-control" id="owner" name="owner">
+                    <option class="text-info">{{ item['owner'] }}</option>
                     {% for user in users %}
                         <option>{{ user['name'] }}</option>
                     {% endfor %}
@@ -40,8 +42,9 @@
             </div>
 
             <div class="form-group">
-                <label for="label">Update Label: <span class="text-muted">{{ item['label'] }}</span></label>
+                <label for="label">Update Label:</label>
                 <select class="form-control" id="label" name="label">
+                    <option class="text-info">{{ item['label'] }}</option>
                     <option>Backlog</option>
                     <option>In Progress</option>
                     <option>In Review</option>
@@ -50,13 +53,15 @@
             </div>
 
             <div class="form-group">
-                <label for="due_date">Update Due Date: <span class="text-muted">{{ item['due_date'] }}</span></label>
-                <input type="date" name="due_date" min="1000-01-01" max="3000-12-31" class="form-control">
+                <label for="due_date">Update Due Date:</label>
+                <input type="date" name="due_date" min="1000-01-01" max="3000-12-31" class="form-control"
+                       value="{{ item['due_date'] }}">
             </div>
 
             <div class="form-group">
-                <label for="board">Update Board: <span class="text-muted">{{ item['board'] }}</span></label>
+                <label for="board">Update Board:</label>
                 <select class="form-control" id="board" name="board">
+                    <option class="text-info">{{ item['board'] }}</option>
                     {% for board in boards %}
                         <option>{{ board['name'] }}</option>
                     {% endfor %}
