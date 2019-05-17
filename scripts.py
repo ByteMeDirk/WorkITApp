@@ -93,7 +93,7 @@ def get_archive():
     con_cards.row_factory = sqlite3.Row
 
     cur = con_cards.cursor()
-    cur.execute("SELECT * FROM card_archive")
+    cur.execute("SELECT * FROM card_archive ORDER BY creation_date")
 
     card_arch = cur.fetchall()
     con_cards.close()

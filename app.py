@@ -7,7 +7,6 @@ import time
 app = Flask(__name__)
 conn = sqlite3.connect('database.db')
 
-
 @app.route('/')
 def index():
     daily_card_count()
@@ -327,6 +326,7 @@ def reload():
 
 
 if __name__ == '__main__':
-    get_daily_card_count()
-    app.run(debug=True)
+    app.run()
+    FLASK_ENV = 'development'
+    FLASK_DEBUG = True
     start_time = time.time()
