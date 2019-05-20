@@ -7,6 +7,7 @@ import time
 app = Flask(__name__)
 conn = sqlite3.connect('database.db')
 
+
 @app.route('/')
 def index():
     daily_card_count()
