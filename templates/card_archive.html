@@ -4,30 +4,32 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Creation Date</th>
-            <th>Deletion Date</th>
-            <th>Creator</th>
-            <th>Board</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for card in card_arch %}
+    <div class="mt-5 mb-5">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ card['id'] }}</td>
-                <td>{{ card['name'] }}</td>
-                <td>{{ card['description'] }}</td>
-                <td>{{ card['creation_date'] }}</td>
-                <td>{{ card['closed_date'] }}</td>
-                <td>{{ card['creator'] }}</td>
-                <td>{{ card['board'] }}</td>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Creation Date</th>
+                <th>Deletion Date</th>
+                <th>Creator</th>
+                <th>Board</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for card in card_arch %}
+                <tr>
+                    <td>{{ card['id'] }}</td>
+                    <td>{{ card['name'] }}</td>
+                    <td>{{ card['description'] }}</td>
+                    <td>{{ card['creation_date'] }}</td>
+                    <td>{{ card['closed_date'] }}</td>
+                    <td>{{ card['creator'] }}</td>
+                    <td>{{ card['board'] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

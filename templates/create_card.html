@@ -4,8 +4,7 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-
-    <form action="{{ url_for('add_card') }}" method="POST">
+    <form action="{{ url_for('add_card') }}" method="POST" class="mt-5 mb-5">
         <div class="form-group">
             <label for="name">Card Name:</label>
             <input required="required" type="text" class="form-control is-invalid" id="name" name="name">
