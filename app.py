@@ -11,11 +11,8 @@ conn = sqlite3.connect('database.db')
 @app.route('/')
 def index():
     daily_card_count()
-    clc = card_list_count()
-    bcc = board_card_count()
-    cc = card_calendar()
-    ci = carousel_insights()
-    dcc = get_daily_card_count()
+    clc, bcc, cc = card_list_count(), board_card_count(), card_calendar()
+    ci, dcc = carousel_insights(), get_daily_card_count()
     return render_template('index.html', clc=clc, bcc=bcc, cc=cc, ci=ci, dcc=dcc)
 
 
@@ -38,22 +35,19 @@ def create_board():
 @app.route('/create_card')
 def create_card():
     get_daily_card_count()
-    users = get_users()
-    boards = get_boards()
+    users, boards = get_users(), get_boards()
     return render_template('create_card.html', users=users, boards=boards)
 
 
 @app.route('/user_list')
 def user_list():
-    users = get_users()
-    teams = get_teams()
+    users, teams = get_users(), get_teams()
     return render_template('user_list.html', users=users, teams=teams)
 
 
 @app.route('/team_list')
 def team_list():
-    users = get_users()
-    teams = get_teams()
+    users, teams = get_users(), get_teams()
     return render_template('team_list.html', users=users, teams=teams)
 
 
@@ -75,15 +69,10 @@ def add_user():
     user_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            email = request.form.get('email')
-            title = request.form.get('title')
-            team = request.form.get('team')
-
-            cur = user_conn.cursor()
+            name, email, cur = request.form['name'], request.form.get('email'), user_conn.cursor()
+            title, team = request.form.get('title'), request.form.get('team')
             cur.execute('INSERT INTO "user"(name, email, title, team) VALUES (?, ?, ?, ?)',
                         (name, email, title, team))
-
             user_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -116,13 +105,10 @@ def add_team():
     team_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            description = request.form.get('description')
-
+            name, description = request.form['name'], request.form.get('description')
             cur = team_conn.cursor()
             cur.execute('INSERT INTO "team"(name, description) VALUES (?, ?)',
                         (name, description))
-
             team_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -155,17 +141,12 @@ def add_board():
     board_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            description = request.form['description']
-            privacy = request.form['privacy']
-            starred = request.form['starred']
-            state = request.form['state']
-
-            cur = board_conn.cursor()
+            name, description = request.form['name'], request.form['description']
+            privacy, starred = request.form['privacy'], request.form['starred']
+            state, cur = request.form['state'], board_conn.cursor()
             cur.execute('INSERT INTO "board"(name, description, privacy, starred, state_list) '
                         'VALUES (?, ?, ?, ?, ?)',
                         (name, description, privacy, starred, state))
-
             board_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -198,17 +179,10 @@ def add_card():
     card_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            description = request.form['description']
-            state = request.form['state']
-            creator = request.form['creator']
-            owner = request.form['owner']
-            current_owner = creator
-            label = request.form['label']
-            creation_date = date_time()
-            due_date = request.form['due_date']
+            name, description, state = request.form['name'], request.form['description'], request.form['state']
+            creator, owner, label = request.form['creator'], request.form['owner'], request.form['label']
+            current_owner, creation_date, due_date = creator, date_time(), request.form['due_date']
             board = request.form['board']
-
             cur = card_conn.cursor()
             cur.execute(
                 'INSERT INTO "card"(name, description, state, creator, owner, current_owner, label, creation_date, due_date, board) '
@@ -240,16 +214,10 @@ def update_edit_card():
     card_conn = sqlite3.connect('database.db')
     if request.method == 'POST':
         try:
-            name = request.form['name']
-            description = request.form['description']
-            state = request.form['state']
-            label = request.form['label']
-            due_date = request.form['due_date']
-            edited_date = date_time()
-            current_owner = request.form['owner']
-            previous_owner = request.form['previous_owner']
+            name, description, state = request.form['name'], request.form['description'], request.form['state']
+            label, due_date, edited_date = request.form['label'], request.form['due_date'], date_time()
+            current_owner, previous_owner = request.form['owner'], request.form['previous_owner']
             board = request.form['board']
-
             cur = card_conn.cursor()
             cur.execute(
                 """UPDATE card SET name=?, description=?, state=?, label=?, due_date=?, edited_date=?, current_owner=?, previous_owner=?, board=? WHERE name=? """,
@@ -274,22 +242,14 @@ def archive_card():
             card_name = request.form['card_name']
             specific_card = get_specific_card(card_name)
             cur = card_conn.cursor()
-
             for spe_card in specific_card:
-                name = spe_card['name']
-                description = spe_card['description']
-                creation_date = spe_card['creation_date']
-                closed_date = date_time()
-                creator = spe_card['creator']
-                board = spe_card['board']
-
+                name, description, creation_date = spe_card['name'], spe_card['description'], spe_card['creation_date']
+                closed_date, creator, board = date_time(), spe_card['creator'], spe_card['board']
             cur.execute('INSERT INTO "card_archive" (name, description, creation_date, closed_date, creator, board) '
                         'VALUES (?,?,?,?,?,?)',
                         (name, description, creation_date, closed_date, creator, board))
             card_conn.commit()
-
             delete_card()
-
             msg = "{} archived".format(name)
         except:
             card_conn.rollback()
