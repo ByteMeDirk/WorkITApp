@@ -71,8 +71,7 @@ def add_user():
         try:
             name, email, cur = request.form['name'], request.form.get('email'), user_conn.cursor()
             title, team = request.form.get('title'), request.form.get('team')
-            cur.execute('INSERT INTO "user"(name, email, title, team) VALUES (?, ?, ?, ?)',
-                        (name, email, title, team))
+            cur.execute('INSERT INTO "user"(name, email, title, team) VALUES (?, ?, ?, ?)', (name, email, title, team))
             user_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -145,8 +144,7 @@ def add_board():
             privacy, starred = request.form['privacy'], request.form['starred']
             state, cur = request.form['state'], board_conn.cursor()
             cur.execute('INSERT INTO "board"(name, description, privacy, starred, state_list) '
-                        'VALUES (?, ?, ?, ?, ?)',
-                        (name, description, privacy, starred, state))
+                        'VALUES (?, ?, ?, ?, ?)', (name, description, privacy, starred, state))
             board_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -188,7 +186,6 @@ def add_card():
                 'INSERT INTO "card"(name, description, state, creator, owner, current_owner, label, creation_date, due_date, board) '
                 'VALUES (?,?,?,?,?,?,?,?,?,?)',
                 (name, description, state, creator, owner, current_owner, label, creation_date, due_date, board))
-
             card_conn.commit()
             msg = "{} added to the system".format(name)
         except:
@@ -222,10 +219,8 @@ def update_edit_card():
             cur.execute(
                 """UPDATE card SET name=?, description=?, state=?, label=?, due_date=?, edited_date=?, current_owner=?, previous_owner=?, board=? WHERE name=? """,
                 (name, description, state, label, due_date, edited_date, current_owner, previous_owner, board, name))
-
             card_conn.commit()
             msg = "{} updated".format(name)
-
         except:
             card_conn.rollback()
             msg = "Error in insert operation"
@@ -246,8 +241,7 @@ def archive_card():
                 name, description, creation_date = spe_card['name'], spe_card['description'], spe_card['creation_date']
                 closed_date, creator, board = date_time(), spe_card['creator'], spe_card['board']
             cur.execute('INSERT INTO "card_archive" (name, description, creation_date, closed_date, creator, board) '
-                        'VALUES (?,?,?,?,?,?)',
-                        (name, description, creation_date, closed_date, creator, board))
+                        'VALUES (?,?,?,?,?,?)', (name, description, creation_date, closed_date, creator, board))
             card_conn.commit()
             delete_card()
             msg = "{} archived".format(name)
