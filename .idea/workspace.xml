@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51c56f41-1237-46c3-8a3e-41fe18bc6a60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/FrontPageShot.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-    </list>
+    <list default="true" id="51c56f41-1237-46c3-8a3e-41fe18bc6a60" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +203,7 @@
       <workItem from="1558593059960" duration="2447000" />
       <workItem from="1571385566962" duration="1788000" />
       <workItem from="1571387513279" duration="3065000" />
-      <workItem from="1571637941581" duration="703000" />
+      <workItem from="1571637941581" duration="978000" />
     </task>
     <task id="LOCAL-00001" summary="Refined user addition and deletion from the system">
       <created>1557570426478</created>
@@ -336,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558344666585</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added Introduction on Readme File">
+      <created>1571638760854</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1571638760854</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +370,8 @@
     <MESSAGE value="Tweaking and Bug Fixing" />
     <MESSAGE value="Updated input validations" />
     <MESSAGE value="General Code Cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="General Code Cleanup" />
+    <MESSAGE value="Added Introduction on Readme File" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Introduction on Readme File" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WorkITApp$insights.coverage" NAME="insights Coverage Results" MODIFIED="1557902533406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
