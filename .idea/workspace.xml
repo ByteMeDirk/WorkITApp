@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51c56f41-1237-46c3-8a3e-41fe18bc6a60" name="Default Changelist" comment="" />
+    <list default="true" id="51c56f41-1237-46c3-8a3e-41fe18bc6a60" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +47,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PyCloudFormer" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -169,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
-        <item itemvalue="Flask server.Flask (app.py)" />
-        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Python.scripts" />
         <item itemvalue="Python.insights" />
+        <item itemvalue="Python.app" />
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="Flask server.Flask (app.py)" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +208,9 @@
       <workItem from="1571385566962" duration="1788000" />
       <workItem from="1571387513279" duration="3065000" />
       <workItem from="1571637941581" duration="978000" />
+      <workItem from="1571639933356" duration="599000" />
+      <workItem from="1571641729553" duration="603000" />
+      <workItem from="1571642812771" duration="627000" />
     </task>
     <task id="LOCAL-00001" summary="Refined user addition and deletion from the system">
       <created>1557570426478</created>
