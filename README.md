@@ -1,4 +1,9 @@
 # WorkITApp
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/58a455e4a5d34978965000407656dc8d)](https://www.codacy.com/manual/dirkscgm/WorkITApp?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DirksCGM/WorkITApp&amp;utm_campaign=Badge_Grade)
+
+---
+
 ![](static/FrontPageShot.PNG)
 
 WorkIt is a simple ticketing and workflow analysis system. With the use of Kanban and D3js visualizations on the ticketing databases.
